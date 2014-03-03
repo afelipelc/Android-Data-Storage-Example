@@ -1,0 +1,82 @@
+        //Recuperar el sharedPreferences
+        SharedPreferences preferencias = 
+                getSharedPreferences("Configuracion",0);
+        String nombre = preferencias.getString("nombre", "Anonimo");
+        
+        int valorX = preferencias.getInt("numeroX", 0);
+        
+        
+        Toast.makeText(getApplicationContext(), "El nombre recueperado es: " 
+        + nombre + "\n\nEl número recuperado es : " + valorX
+        , Toast.LENGTH_LONG).show();
+        /*
+        //abrir las preferencias en modo de edicion
+        SharedPreferences.Editor editor = preferencias.edit();
+        
+        //guardar los valores
+        editor.putString("nombre", "Felipe LC");
+        editor.putInt("numeroX", 45);
+        //enviar cambios
+        editor.commit();
+        
+        //volver a recuperar los valores guardados
+        nombre = preferencias.getString("nombre", "Anonimo");
+        valorX = preferencias.getInt("numeroX", 0);
+        
+        
+        Toast.makeText(getApplicationContext(), "El nombre recueperado es: " 
+        + nombre + "\n\nEl número recuperado es : " + valorX
+        , Toast.LENGTH_LONG).show();
+        
+        
+        //Almacenamiento Interno
+        try {
+            String contenido = "Este es el contenido para mi archivo";
+            FileOutputStream fos = openFileOutput("miArchivo"
+                    , Context.MODE_PRIVATE);
+            fos.write(contenido.getBytes());
+            fos.close();
+
+            //Lectura
+            FileInputStream fin = openFileInput("miArchivo");
+            byte[] entrada = new byte[128];
+            fin.read(entrada); //despues de leer los bytes del archivo
+            //faltará convertirlos al tipo de dato de origen
+            
+            Toast.makeText(getApplicationContext(), 
+                    "Lectura: " + entrada.toString(), Toast.LENGTH_SHORT).show();
+            
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        */
+        //CARPETA PRIVADA
+        Toast.makeText(getApplicationContext(), "La carpeta privada"
+                +" se encuentra en: \n"
+                + getFilesDir(), Toast.LENGTH_SHORT).show();
+        
+        
+        //Almacenamiento Externo
+        //Crear carpeta
+        File carpeta = new File(Environment.getExternalStorageDirectory()+"/MiCarpeta");
+        if(!carpeta.exists()){
+            if(carpeta.mkdir())
+            {
+                Toast.makeText(getApplicationContext(), 
+                        "Carpeta creada en: " 
+                + carpeta.getAbsolutePath(), 
+                Toast.LENGTH_SHORT).show();
+            }
+        }else
+        {
+            Toast.makeText(getApplicationContext(), 
+                    "La carpeta ya existe en: " 
+            + carpeta.getAbsolutePath(), 
+            Toast.LENGTH_SHORT).show();
+        }
+        

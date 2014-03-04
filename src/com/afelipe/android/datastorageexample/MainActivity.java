@@ -95,6 +95,7 @@ public class MainActivity extends Activity {
 		
 		
 		//FINALIZA EJEMPLOS de ALMACENAMIENTO
+		//Disponible en https://github.com/afelipelc/Android-Data-Storage-Example
 		
 		//listaListView = (ListView) findViewById(R.id.listadepartamentos);		
 	}

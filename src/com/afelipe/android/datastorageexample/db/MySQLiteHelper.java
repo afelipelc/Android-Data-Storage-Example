@@ -3,7 +3,13 @@ package com.afelipe.android.datastorageexample.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
+/**
+ * Clase que crea la base de datos.
+ * 
+ * Para más información sobre SQLite en Android, referirse a https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html
+ * @author afelipe
+ *
+ */
 public class MySQLiteHelper extends SQLiteOpenHelper {
 
 	//constantes de información sobre la BD

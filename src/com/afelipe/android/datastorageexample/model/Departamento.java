@@ -2,7 +2,7 @@ package com.afelipe.android.datastorageexample.model;
 
 public class Departamento {
 	int idDepartamento;
-	private String nombre, responsable, cargoResponsable, telefono, email, foto, informacion;
+	private String nombre, responsable, cargoResponsable, telefono, email, foto="", informacion="";
 	public int getIdDepartamento() {
 		return idDepartamento;
 	}

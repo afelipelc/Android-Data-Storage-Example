@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.afelipe.android.datastorageexample.adapter.ListViewAdapter;
-import com.afelipe.android.datastorageexample.db.DepartamentosDBDataSource;
+import com.afelipe.android.datastorageexample.db.DepartamentosDataSource;
 import com.afelipe.android.datastorageexample.model.Departamento;
 
 import android.os.Bundle;
@@ -22,6 +22,11 @@ import android.view.Menu;
 import android.widget.ListView;
 import android.widget.Toast;
 
+/**
+ *  Disponible en https://github.com/afelipelc/Android-Data-Storage-Example
+ *  @author afelipe
+ *
+ */
 public class MainActivity extends Activity {
 
 	ListView listaListView;
@@ -106,30 +111,41 @@ public class MainActivity extends Activity {
 		//Disponible en https://github.com/afelipelc/Android-Data-Storage-Example
 		*/
 		
+		// INICIA Ejemplo de Manipulación de BD
 		
 		listaListView = (ListView) findViewById(R.id.listadepartamentos);
 		
 		//Insertar objetos en la BD
-		//solo ejecutar una vez
-		for(int i=5; i<=8; i++)
+		
+		//Crear 10 objetos departamento y ponerlos en la coleccion
+	
+		for(int i=5; i<=12; i++)
 		{
 			Departamento item = new Departamento();
 			item.setIdDepartamento(i);
-			item.setNombre("Departamento U" + i);
+			item.setNombre("Departamento actualizado" + i);
 			item.setResponsable("Resp " + i);
 			item.setCargoResponsable("Cargo " + i);
 			item.setTelefono("0 00 00");
 			item.setEmail("item"+i+"@example.com");
-			
-			//DepartamentosDBDataSource.registrarDepartamento(this, 
-			//		item);
+
 			listaDepartamentos.add(item);
 		}
+		
+		//Crear objeto del DataSource
+		DepartamentosDataSource dataSource = new DepartamentosDataSource(this);
+		
+		//ABRIR LA BASE DE DATOS
+		dataSource.openDB();
+		
 //>>>		//registrar todos los departamentos
 		//esto solo una vez, de lo contrario cada vez que inicie la 
 		//app se insertaran nuevos departamentos
 		//>>>DepartamentosDBDataSource.registrarDepartamentos(this, listaDepartamentos);
 
+		//le pasamos la lista de departamentos al DS
+//>>>>		//dataSource.registrarDepartamentos(listaDepartamentos);
+		
 		//>> Ya funcionando la aplicación no sería conveniente llamar al metodo
 		//registrar cada vez que se obtengan datos del WS, ya que la probabilidad 
 		//de tener muchos departamentos nuevos es menor después de la primera ejecución
@@ -139,19 +155,25 @@ public class MainActivity extends Activity {
 		
 		//y lo más conveniente sería utilizar un AsyncTask para evitar carga al proceso principal
 		//cuando se reciban desde el WS
-		DepartamentosDBDataSource.actualizarDepartamentos(this, listaDepartamentos);
+		Log.d("Departamentos a insertar", listaDepartamentos.size()+"");
+		dataSource.actualizarDepartamentos(listaDepartamentos);
 		
 		//recuperar la lista de departamentos desde la BD
-		this.listaDepartamentos = DepartamentosDBDataSource.listaDepartamentos(this);
+		this.listaDepartamentos = dataSource.listaDepartamentos();
 		//si listaDepartamentos es null, inicializarlo en vacio para evitar un error
 		if(listaDepartamentos == null)
 		{
 			listaDepartamentos = new ArrayList<Departamento>();
-			Toast.makeText(this, "No se obtuvo ningún registro de la BD", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "No se obtuvo ningún registro de la BD",
+					Toast.LENGTH_SHORT).show();
 		}
+		
 		Log.d("Departamentos encontrados", listaDepartamentos.size()+"");
 		//pasar la lista de departamentos al Adapter y asignarlo al ListView
-		this.listaListView.setAdapter(new ListViewAdapter(this,listaDepartamentos));
+		this.listaListView.setAdapter(
+				new ListViewAdapter(this,listaDepartamentos));
+		
+		dataSource.closeDB(); //Cerrar DB
 	}
 
 	@Override
@@ -162,3 +184,4 @@ public class MainActivity extends Activity {
 	}
 
 }
+

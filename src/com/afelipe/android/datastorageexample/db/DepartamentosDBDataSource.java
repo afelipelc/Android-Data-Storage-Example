@@ -17,15 +17,13 @@ import android.widget.Toast;
 /**
  * Clase para administrar la BD Se ha creado como final static para no tener que
  * crear objetos al momento de realizar la manipulación. de este modo el
- * aplicación reduce el consumo de memoria pero puede aumentar un % el consumo
- * de reloj del procesador.
+ * aplicación reduce el consumo de memoria
  * 
  * En cada método se requiere un objeto Context para poder realizar la apertura
  * y cierre de la BD.
  * 
  * Para más información sobre SQLite en Android, referirse a
- * https://developer.android
- * .com/reference/android/database/sqlite/SQLiteDatabase.html
+ * https://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html
  * 
  * @author afelipe
  * 

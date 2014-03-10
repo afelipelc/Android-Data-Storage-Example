@@ -80,3 +80,32 @@
             Toast.LENGTH_SHORT).show();
         }
         
+        
+        
+        --------------------- Data Source
+            public boolean eliminarDepartamento(Departamento depto){
+        int res = database.delete("departamentosTbl",  "id=?", new String[] {depto.getIdDepartamento()+""});
+        return res == 1;
+    }
+    
+    /**
+     * Devuelve la lista de todos los departamentos 
+     * @return
+     */
+    public List<Departamento> listaDepartamentos(){
+        Cursor result = database.rawQuery("select * from departamentosTbl", null);
+        //Cursos contienen los registros como resultado, que puede 
+        //ser uno o más
+        
+        List<Departamento> lista = new ArrayList<Departamento>();
+        
+        //cuando el resultado esperado puede contener más de un registro, se debe
+        //recorrer con un moveToNext()
+        while(result.moveToNext()){
+            //aquí procesar el la fila actual del Cursor
+            //y convertir los datos a un objeto Departamento
+            //y agregar el objeto a la lista
+            
+        }
+        return lista;
+    }
